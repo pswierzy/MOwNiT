@@ -24,8 +24,8 @@ def sum_kahan_alg(numbers):
     acc = np.float32(0.0)
     err = np.float32(0.0)
     for num in numbers:
-        y = num - err
-        temp = acc + y
+        y = np.float32(num - err)
+        temp = np.float32(acc + y)
         err = (temp - acc) - y
         acc = temp
     return acc
@@ -59,9 +59,4 @@ plt.title('Porównanie błędów względnych metod sumowania')
 plt.legend()
 plt.grid(True, which='both', linestyle='--')
 plt.xticks(n_array, [f'10^{k}' for k in range(4,9)])
-
-all_values = np.concatenate([errors[method] for method in methods])
-ymin, ymax = np.min(all_values), np.max(all_values)
-plt.ylim(ymin * 0.5, ymax * 2) 
-
 plt.show()
